@@ -1,0 +1,16 @@
+<svg viewBox="0 0 500 500" width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="500" rx="90" fill="#136168" />
+  <circle cx="250" cy="250" r="234" fill="none" stroke="#FFFFFF" stroke-width="7" />
+  <circle cx="250" cy="250" r="226" fill="#136168" />
+  <g fill="#FAF5F5">
+    <circle cx="283" cy="88" r="18" />
+    <path d="M204 150 C200 105, 212 65, 232 63 C248 61, 265 82, 261 95 C257 104, 245 96, 235 84 C222 72, 212 105, 204 150 Z" />
+    <path d="M278 112 C276 136, 290 160, 308 158 C326 156, 340 132, 336 105 C330 124, 318 138, 306 137 C295 136, 292 118, 286 110 C282 106, 279 108, 278 112 Z" />
+    <path d="M150 222 L212 152 C202 142, 204 128, 216 128 C234 128, 266 156, 262 175 C258 190, 234 202, 196 206 C218 195, 234 184, 236 173 L228 166 L156 224 Z" />
+  </g>
+  <text x="250" y="290" text-anchor="middle" fill="#FF6B1A" font-family="Impact, Arial Black, sans-serif" font-weight="900" font-size="94" letter-spacing="1">ACTIVE</text>
+  <text x="250" y="322" text-anchor="middle" fill="#051416" font-family="sans-serif" font-weight="700" font-size="18" letter-spacing="1.5">HABIB</text>
+  <text x="250" y="362" text-anchor="middle" fill="#4DD0E1" font-family="sans-serif" font-weight="800" font-size="41">Patan facbook</text>
+  <text x="250" y="408" text-anchor="middle" fill="#B4F156" font-family="sans-serif" font-weight="700" font-size="36">پٹھان سوشل</text>
+  <text x="250" y="445" text-anchor="middle" fill="#B4F156" font-family="sans-serif" font-weight="700" font-size="34">سایٹ</text>
+</svg>

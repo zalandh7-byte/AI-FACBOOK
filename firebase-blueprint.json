@@ -1,0 +1,503 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Public community profile for a user on Active Habib Patan Social without any PII.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Unique user identifier matching Firebase Auth UID.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Public display name shown on posts and profile.",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "bio": {
+          "type": "string",
+          "description": "Short biography or status tagline.",
+          "minLength": 0,
+          "maxLength": 300
+        },
+        "region": {
+          "type": "string",
+          "description": "General region or city name (non-PII).",
+          "minLength": 0,
+          "maxLength": 80
+        },
+        "avatarUrl": {
+          "type": "string",
+          "description": "URL or asset path for the profile avatar.",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "coverUrl": {
+          "type": "string",
+          "description": "URL or asset path for the profile cover banner.",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "visibility": {
+          "type": "string",
+          "description": "Visibility of the public profile.",
+          "enum": ["public", "private"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the profile was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the profile was last updated."
+        }
+      },
+      "required": [
+        "uid",
+        "displayName",
+        "bio",
+        "region",
+        "avatarUrl",
+        "coverUrl",
+        "visibility",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "UserPrivate": {
+      "title": "UserPrivate",
+      "description": "Strictly isolated private user preferences and PII accessible only to the owner.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Private email address of the authenticated user.",
+          "minLength": 3,
+          "maxLength": 150
+        },
+        "language": {
+          "type": "string",
+          "description": "Preferred UI language code.",
+          "enum": ["ur", "ps", "en"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last update."
+        }
+      },
+      "required": ["uid", "email", "language", "createdAt", "updatedAt"]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "Social feed post created by a verified user.",
+      "type": "object",
+      "properties": {
+        "postId": {
+          "type": "string",
+          "description": "Unique post identifier.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorId": {
+          "type": "string",
+          "description": "UID of the user who authored the post.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Display name of the post author.",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "authorAvatar": {
+          "type": "string",
+          "description": "Avatar URL of the post author.",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "content": {
+          "type": "string",
+          "description": "Main text content of the post.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "mediaUrl": {
+          "type": "string",
+          "description": "Optional image URL attached to the post.",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "feeling": {
+          "type": "string",
+          "description": "Optional feeling or activity label.",
+          "minLength": 0,
+          "maxLength": 60
+        },
+        "category": {
+          "type": "string",
+          "description": "Topic category for feed filtering.",
+          "enum": ["general", "culture", "sports", "news", "poetry", "hujra"]
+        },
+        "visibility": {
+          "type": "string",
+          "description": "Access level of the post.",
+          "enum": ["public", "private"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when post was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when post was updated."
+        }
+      },
+      "required": [
+        "postId",
+        "authorId",
+        "authorName",
+        "authorAvatar",
+        "content",
+        "mediaUrl",
+        "feeling",
+        "category",
+        "visibility",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "PostLike": {
+      "title": "PostLike",
+      "description": "Reaction or like on a specific post.",
+      "type": "object",
+      "properties": {
+        "postId": {
+          "type": "string",
+          "description": "ID of the parent post.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the user reacting to the post.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userName": {
+          "type": "string",
+          "description": "Display name of the reacting user.",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "reactionType": {
+          "type": "string",
+          "description": "Type of reaction.",
+          "enum": ["like", "love", "salam", "fire"]
+        },
+        "visibility": {
+          "type": "string",
+          "description": "Visibility matching the parent post.",
+          "enum": ["public", "private"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when reaction was created."
+        }
+      },
+      "required": [
+        "postId",
+        "userId",
+        "userName",
+        "reactionType",
+        "visibility",
+        "createdAt"
+      ]
+    },
+    "PostComment": {
+      "title": "PostComment",
+      "description": "Comment on a specific post.",
+      "type": "object",
+      "properties": {
+        "commentId": {
+          "type": "string",
+          "description": "Unique comment ID.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "postId": {
+          "type": "string",
+          "description": "ID of the parent post.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorId": {
+          "type": "string",
+          "description": "UID of the comment author.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Display name of the comment author.",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "authorAvatar": {
+          "type": "string",
+          "description": "Avatar URL of the comment author.",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "content": {
+          "type": "string",
+          "description": "Comment text content.",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "visibility": {
+          "type": "string",
+          "description": "Visibility of the comment.",
+          "enum": ["public", "private"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of update."
+        }
+      },
+      "required": [
+        "commentId",
+        "postId",
+        "authorId",
+        "authorName",
+        "authorAvatar",
+        "content",
+        "visibility",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Story": {
+      "title": "Story",
+      "description": "Vertical visual story card displayed in the top stories reel.",
+      "type": "object",
+      "properties": {
+        "storyId": {
+          "type": "string",
+          "description": "Unique story identifier.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorId": {
+          "type": "string",
+          "description": "UID of the user who posted the story.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Display name of the story creator.",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "authorAvatar": {
+          "type": "string",
+          "description": "Avatar URL of the story creator.",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "caption": {
+          "type": "string",
+          "description": "Short story caption or headline.",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "mediaUrl": {
+          "type": "string",
+          "description": "Optional background image URL.",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "themeColor": {
+          "type": "string",
+          "description": "Background theme identifier.",
+          "enum": ["teal", "orange", "emerald", "slate"]
+        },
+        "visibility": {
+          "type": "string",
+          "description": "Story visibility.",
+          "enum": ["public", "private"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when story was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when story was updated."
+        }
+      },
+      "required": [
+        "storyId",
+        "authorId",
+        "authorName",
+        "authorAvatar",
+        "caption",
+        "mediaUrl",
+        "themeColor",
+        "visibility",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Friendship": {
+      "title": "Friendship",
+      "description": "Friend request or accepted connection between two community members.",
+      "type": "object",
+      "properties": {
+        "friendshipId": {
+          "type": "string",
+          "description": "Unique friendship document ID.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "requesterId": {
+          "type": "string",
+          "description": "UID of the user who initiated the friend request.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "requesterName": {
+          "type": "string",
+          "description": "Display name of the requester.",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "requesterAvatar": {
+          "type": "string",
+          "description": "Avatar URL of the requester.",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "receiverId": {
+          "type": "string",
+          "description": "UID of the user receiving the friend request.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "receiverName": {
+          "type": "string",
+          "description": "Display name of the receiver.",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "receiverAvatar": {
+          "type": "string",
+          "description": "Avatar URL of the receiver.",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "status": {
+          "type": "string",
+          "description": "Friendship status with terminal state locking on accepted/declined.",
+          "enum": ["pending", "accepted", "declined"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of request creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of status update."
+        }
+      },
+      "required": [
+        "friendshipId",
+        "requesterId",
+        "requesterName",
+        "requesterAvatar",
+        "receiverId",
+        "receiverName",
+        "receiverAvatar",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/profiles/{userId}": {
+      "schema": "UserProfile",
+      "description": "Public user profiles without PII."
+    },
+    "/users_private/{userId}": {
+      "schema": "UserPrivate",
+      "description": "Isolated private user settings and email address."
+    },
+    "/posts/{postId}": {
+      "schema": "Post",
+      "description": "Main social feed posts."
+    },
+    "/posts/{postId}/likes/{likeUserId}": {
+      "schema": "PostLike",
+      "description": "User reactions/likes on a specific post."
+    },
+    "/posts/{postId}/comments/{commentId}": {
+      "schema": "PostComment",
+      "description": "User comments on a specific post."
+    },
+    "/stories/{storyId}": {
+      "schema": "Story",
+      "description": "Vertical stories in the top reel."
+    },
+    "/friendships/{friendshipId}": {
+      "schema": "Friendship",
+      "description": "Friend connections and requests between users."
+    }
+  }
+}

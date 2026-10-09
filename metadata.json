@@ -1,0 +1,6 @@
+{
+  "name": "Active Habib - Patan Social (پٹھان سوشل سایٹ)",
+  "description": "A complete Facebook-style community social media network for Active Habib Patan Social Site featuring real-time feed posts, stories, likes, comments, friend requests, groups, and bilingual Urdu/Pashto/English interface.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
